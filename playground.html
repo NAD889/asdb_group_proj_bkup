@@ -1,0 +1,56 @@
+
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+</head>
+<script>
+  //use this when changing to jinja template
+  //var zoneCollection = {{zones_json}}
+  //var stptCollection = {{stpts_json}}
+
+  var zoneCollection = [{"geometry": {"type": "Polygon", "coordinates": [[[-3.164635466813388, 55.951799028282466], [-3.166988496117901, 55.94231630643838], [-3.175117142804584, 55.94295521536799], [-3.1775058240688003, 55.94571038950505], [-3.1761153976583216, 55.94906424994349], [-3.1712667312194647, 55.950701147765145], [-3.1647067707327956, 55.951759105879894], [-3.164635466813388, 55.951799028282466]]]}, "type": "Feature", "properties": {"zone_id": 1}}, {"geometry": {"type": "Polygon", "coordinates": [[[-3.164635466813388, 55.951799028282466], [-3.161723719654915, 55.95290947831496], [-3.1616889017809524, 55.94989275068589], [-3.1616347602558967, 55.94520129599506], [-3.166988496117901, 55.94231630643838], [-3.164635466813388, 55.951799028282466]]]}, "type": "Feature", "properties": {"zone_id": 2}}, {"geometry": {"type": "Polygon", "coordinates": [[[-3.1616347602558967, 55.94520129599506], [-3.1545043684229515, 55.94619951224978], [-3.1521869910871256, 55.94324471751544], [-3.1598165103379565, 55.94046940098423], [-3.1651999561723696, 55.94124810699542], [-3.166988496117901, 55.94231630643838], [-3.1616347602558967, 55.94520129599506]]]}, "type": "Feature", "properties": {"zone_id": 3}}, {"geometry": {"type": "Polygon", "coordinates": [[[-3.1616347602558967, 55.94520129599506], [-3.154646976261766, 55.953126424024084], [-3.150796564676647, 55.95107043830782], [-3.1504756970482966, 55.94761693508114], [-3.1545043684229515, 55.94619951224978], [-3.1616347602558967, 55.94520129599506]]]}, "type": "Feature", "properties": {"zone_id": 4}}, {"geometry": {"type": "Polygon", "coordinates": [[[-3.161723719654915, 55.95290947831496], [-3.1596025985887177, 55.95348571127494], [-3.155966098752837, 55.95382503510049], [-3.154646976261766, 55.953126424024084], [-3.1616347602558967, 55.94520129599506], [-3.161723719654915, 55.95290947831496]]]}, "type": "Feature", "properties": {"zone_id": 5}}];
+
+  var stptCollection = [{"geometry": {"type": "Point", "coordinates": [-3.169689806055946, 55.95095546913427]}, "type": "Feature", "properties": {"start_id": 1}}, {"geometry": {"type": "Point", "coordinates": [-3.1639334269281885, 55.95206676742041]}, "type": "Feature", "properties": {"start_id": 2}}, {"geometry": {"type": "Point", "coordinates": [-3.155170493466118, 55.95340368175302]}, "type": "Feature", "properties": {"start_id": 3}}, {"geometry": {"type": "Point", "coordinates": [-3.1522975737612766, 55.94697594365855]}, "type": "Feature", "properties": {"start_id": 4}}, {"geometry": {"type": "Point", "coordinates": [-3.1523297085876796, 55.94342669739236]}, "type": "Feature", "properties": {"start_id": 5}}];
+
+
+</script>
+<body>
+<div id = 'lf_map_div' style="height:100%">
+
+</div>
+
+</body>
+
+<script>
+var map = L.map('lf_map_div').setView([55.950256, -3.172123], 15);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+var myStyle = {
+  weight:5,
+  fillColor: "red",
+  color: "#000",
+
+};
+
+L.geoJSON(zoneCollection,{
+  style: myStyle
+}).addTo(map);
+L.geoJSON(stptCollection,{
+  style: myStyle
+}).addTo(map);
+
+
+</script>
+
+
+
+
+</html>
