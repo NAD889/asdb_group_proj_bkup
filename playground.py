@@ -98,6 +98,9 @@ def grab_info(table_key):
     qy_switcher = {
             'get_start_pts' : 'select c.startpoint_id, t.X, t.Y from s1889111.startpoints c, TABLE(SDO_UTIL.GETVERTICES(c.geom)) t',
             'get_zone_polygons_pts' : 'select c.zone_id, t.x, t.y from s1889111.zones c, table(sdo_util.getvertices(c.geom)) t'
+            'get_treasure_pts' : 'select c.penalty_id, t.x, t.y from s1889111.treasure c, table(sdo_util.getvertices(c.geom)) t'
+            'get_link_pts' : 'select c.path_id, t.x, t.y from s1889111.path c, table(sdo_util.getvertices(c.geom)) t'
+            'get_risk_pts' : 'select c.risk_id, t.x, t.y from s1889111.risks c, table(sdo_util.getvertices(c.geom)) t'
             }
 
     return qy_switcher.get(table_key)
@@ -165,6 +168,9 @@ if __name__ == '__main__':
     conn = connect_dbs()
     start_pt_geojson = getInfoFromDB(conn,'get_start_pts')
     zones_geojson = getInfoFromDB(conn,'get_zone_polygons_pts')
+    treasure_geojson = getInfoFromDB(conn,'get_treasure_pts')
+    links_geojson = getInfoFromDB(conn,'get_link_pts')
+    risks_geojson = getInfoFromDB(conn,'get_risk_pts')
     
 #JINJA
 #    env = Environment(loader = FileSystemLoader('template'))
